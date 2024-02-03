@@ -1,26 +1,6 @@
 <template>
     <div>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">{{ status }}</h3>
-            </div>
-            <div class="panel-body">
-                <div v-for="(task, index) in filteredTasks" :key="index" class="task-row">
-                    <div class="col-xs-6">
-                        <img :src="task.author.avatar" width="30" class="img-circle" alt="Author Image">
-                    </div>
-                    <div class="col-xs-6 action-btn">
-                        <a data-toggle="modal" data-target="#taksModal" @click="editTask(task)" href="#"><i
-                                class="fa fa-edit"></i></a>
-                        <a href="#" @click="deleteTask(task, index)"><i class="fa fa-trash"></i></a>
-                    </div>
-                    <div class="col-xs-12">
-                        {{ task.title }}
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-footer"></div>
-        </div>
+
 
         <!-- The modal -->
         <div class="modal fade" id="taksModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -38,7 +18,7 @@
                                 <i class="fa fa-warning">{{ error }}</i>
                             </div>
                         </span>
-                        <form action="#" @submit.prevent="form.id ? updateTask() : saveTask()">
+                        <form action="#" @submit.prevent="saveTask()">
                             <div class="form-group">
                                 <label for="title">Title</label>
                                 <input v-model="form.title" type="text" class="form-control" id="title" name="title">
@@ -107,38 +87,6 @@ export default {
         },
     },
     methods: {
-        editTask(task) {
-            console.log(`Editing task: ${task.title}`);
-            this.form.fill(task)
-        },
-        deleteTask(task, index) {
-            console.log(`Deleting task with ID: ${index}`);
-
-
-            this.errors = [];
-            this.form
-                .delete("tasku/" + task.id)
-                .then((response) => {
-                    console.log(response);
-                    toast({
-                        type: "success",
-                        title: response.data.message,
-                    });
-                    this.tasks.splice(index, 1)
-
-                })
-                .catch((error) => {
-
-
-                    toast({
-                        type: "warning",
-                        title: error.response.data.message,
-                    });
-                })
-                .finally(() => {
-                    this.savingImage = false;
-                });
-        },
 
         saveTask() {
 
@@ -165,34 +113,7 @@ export default {
                 });
         },
 
-        updateTask() {
-
-            this.savingImage = true;
-            this.errors = [];
-            this.form
-                .post("task/" + this.form.id)
-                .then((response) => {
-                    console.log(response);
-                    toast({
-                        type: "success",
-                        title: response.data.message,
-                    });
-                })
-                .catch((error) => {
-                    console.log(error);
-                    if (error.response.status === 412) {
-                        this.errors = [error.response.data.message];
-                    }
-
-                    toast({
-                        type: "warning",
-                        title: error.response.data.message,
-                    });
-                })
-                .finally(() => {
-                    this.savingImage = false;
-                });
-        }
+       
     },
 };
 </script>
