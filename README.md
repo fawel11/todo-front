@@ -3,7 +3,7 @@
 <br>
 <img src="https://img.shields.io/badge/AdminLTE-2.3.11-blue.svg"> <img src="https://img.shields.io/badge/jquery-3.1.1-lightgrey.svg"> <img src="https://img.shields.io/badge/bootstrap-3.3.7-blue.svg"> <img src="https://img.shields.io/badge/vue-2.2.1-brightgreen.svg"> <img src="https://img.shields.io/badge/vuex-2.2.1-brightgreen.svg"> <img src="https://img.shields.io/badge/vue--router-2.3.0-green.svg">
 
-![Alt Text](public/design.png)
+![Alt Text](design.png)
 
 <br>
 <img src="https://img.shields.io/badge/npm-0.4.3-blue.svg">
@@ -29,7 +29,7 @@
 npm install --ignore-scripts
 
 # serve with hot reload at localhost:8080
-npm run dev
+npm run dev-server
 
 # build for production with minification
 npm run build
